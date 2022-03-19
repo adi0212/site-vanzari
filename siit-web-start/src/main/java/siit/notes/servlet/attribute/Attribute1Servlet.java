@@ -17,7 +17,7 @@ public class Attribute1Servlet extends HttpServlet {
         ServletContext context = getServletContext();
         PrintWriter out = resp.getWriter();
         context.setAttribute("attr1", "am setat valoarea din attr1");
-        out.print("<a href=\"http://localhost:8080/attribute2\"> Go to attribute 2 </>");
+        out.print("<a href=\"http://localhost:8085/attribute2\"> Go to attribute 2 </>");
         out.close();
     }
 }

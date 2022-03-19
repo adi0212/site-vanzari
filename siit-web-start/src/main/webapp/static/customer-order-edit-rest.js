@@ -1,4 +1,4 @@
-// http://localhost:8080/static/customer-order-edit-rest.html#customerId=1&orderId=6
+// http://localhost:8085/static/customer-order-edit-rest.html#customerId=1&orderId=6
 var customerId = $.url('#customerId');
 var orderId = $.url('#orderId');
 

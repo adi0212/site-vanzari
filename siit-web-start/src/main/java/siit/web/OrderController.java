@@ -11,7 +11,7 @@ import siit.service.OrderService;
 
 @Controller
 @RequestMapping("")
-////    http://localhost:8080/customers/{customerId}/orders GET
+////    http://localhost:8085/customers/{customerId}/orders GET
 public class OrderController {
 
     @Autowired
@@ -28,7 +28,7 @@ public class OrderController {
         return mav;
     }
 
-    //    http://localhost:8080/customers/1/orders/add
+    //    http://localhost:8085/customers/1/orders/add
     @RequestMapping(method = RequestMethod.GET, path = "/customers/{customerId}/orders/add")
     public ModelAndView renderCustomerOrderAddPage(@PathVariable Integer customerId) {
         ModelAndView mav = new ModelAndView("customer-order-add");
@@ -37,7 +37,7 @@ public class OrderController {
         return mav;
     }
 
-    //    http://localhost:8080/customers/1/orders/add
+    //    http://localhost:8085/customers/1/orders/add
     @RequestMapping(method = RequestMethod.POST, path = "/customers/{customerId}/orders/add")
     public ModelAndView addOrderV1(@ModelAttribute Order order) {
         ModelAndView modelAndView = new ModelAndView("customer-order-add");
@@ -72,7 +72,7 @@ public class OrderController {
         return modelAndView;
     }
 
-//    http://localhost:8080/api/customers/1/orders/3
+//    http://localhost:8085/api/customers/1/orders/3
     @RequestMapping(method = RequestMethod.GET, path = "/api/customers/{cId}/orders/{oId}")
     @ResponseBody
     public Order getOrderForOrderEdit(@PathVariable("cId") Integer customerId, @PathVariable("oId") Integer orderId){
