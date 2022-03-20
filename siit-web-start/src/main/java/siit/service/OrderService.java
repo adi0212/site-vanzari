@@ -61,8 +61,8 @@ public class OrderService {
         return false;
     }
 
-    public boolean delete(Order order){
-        orderDao.delete(order.getId());
+    public boolean delete(Integer orderID){
+        orderDao.delete(orderID);
         return true;
     }
 

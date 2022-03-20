@@ -63,7 +63,8 @@ public class OrderDao {
     }
 
     public void delete(Integer order){
-        String sql = "delete from orders where id = " + order;
+        String sql = "delete from orders_products where order_id =  " + order +
+                "; delete from orders where id = " + order + ";";
         jdbcTemplate.update(sql);
     }
 }
