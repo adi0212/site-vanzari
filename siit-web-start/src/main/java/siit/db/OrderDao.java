@@ -61,4 +61,9 @@ public class OrderDao {
         String sql = "INSERT INTO ORDERS(customer_id, number, placed) VALUES (?,?,?)";
         jdbcTemplate.update(sql, order.getCustomerId(), order.getNumber(), order.getPlaced());
     }
+
+    public void delete(Order order){
+        String sql = "DELETE FROM ORDERS WHERE ID = ?";
+        jdbcTemplate.update(sql, order.getId());
+    }
 }

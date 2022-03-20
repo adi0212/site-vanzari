@@ -2,7 +2,6 @@ package siit.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import siit.db.ProductDao;
 import siit.model.OrderProduct;
 import siit.db.OrderProductDao;
 import siit.model.Product;
@@ -22,7 +21,6 @@ public class OrderProductService {
             Product product = productService.getBy(orderProduct.getProductId());
             orderProduct.setProduct(product);
         }
-
         return orderProducts;
     }
 }

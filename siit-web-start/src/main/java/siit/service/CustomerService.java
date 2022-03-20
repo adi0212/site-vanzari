@@ -1,6 +1,5 @@
 package siit.service;
 
-import ch.qos.logback.core.net.SocketConnector;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import siit.db.CustomerDao;
@@ -8,6 +7,7 @@ import siit.model.Customer;
 import siit.personal_errors.IncorrectNameException;
 import siit.personal_errors.IncorrectPhoneNumberException;
 
+import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -19,14 +19,13 @@ public class CustomerService {
     private OrderService orderService;
 
     public void update(Customer customer) throws IncorrectNameException, IncorrectPhoneNumberException {
-//        phone number Validation -> phone sa contina doar cifre, un anumit numar de caractere
+
         if (verifyName(customer.getName())) {
             if(verifyPhoneNumber(customer.getPhone())) {
-                //update cu succes
                 customerDao.update(customer);
 
             }else {
-                throw new IncorrectNameException("Incorrect phone noumber");
+                throw new IncorrectNameException("Incorrect phone number");
             }
         } else {
             throw new IncorrectPhoneNumberException("Incorrect name");
@@ -54,17 +53,17 @@ public class CustomerService {
         if (stringName[0].equals("")){
             return false;
         }
-        for(int j = 0; j < stringName.length; j++){
-            char [] charName = stringName[j].toCharArray();
+        for (String s : stringName) {
+            char[] charName = s.toCharArray();
 
-            for (int i = 0; i < charName.length; i++){
-                if(!Character.isLetter(charName[i])){
+            for (char c : charName) {
+                if (!Character.isLetter(c)) {
                     return false;
                 }
             }
 
-            charName[1]= Character.toUpperCase(charName[1]);// all names start with big letter
-            newName = charName.toString()+ " ";
+            charName[1] = Character.toUpperCase(charName[1]);// all names start with big letter
+            newName = Arrays.toString(charName) + " ";
 
         }
         name = newName;
@@ -83,11 +82,7 @@ public class CustomerService {
                 return false;
             }
         }
-
-        if (phone.length > 11){
-            return false;
-        }
-        return true;
+        return phone.length <= 11;
     }
 
 }

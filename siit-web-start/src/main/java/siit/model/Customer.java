@@ -80,6 +80,11 @@ public class Customer {
         this.orders = orders;
     }
 
+    public List<Order> deleteOrder (List <Order> orders, Order orderToDelete){
+        orders.remove(orderToDelete);
+        return orders;
+    }
+
     @Override
     public String toString() {
         return "Customer{" +

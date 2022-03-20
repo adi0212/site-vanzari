@@ -42,14 +42,18 @@ public class OrderController {
     public ModelAndView addOrderV1(@ModelAttribute Order order) {
         ModelAndView modelAndView = new ModelAndView("customer-order-add");
         Order dbOrder = orderService.getByNumber(order.getNumber());
-        if (dbOrder == null) {
-            orderService.add(order);
+        if (dbOrder == null ) {
+            if(orderService.add(order)){
             modelAndView.setViewName("redirect:/customers/" + order.getCustomerId() + "/orders");
+            }else {
+                modelAndView.addObject("error", "The order number box need to be filled");
+                return modelAndView;
+            }
         } else {
             Customer customer = new Customer();
             customer.setId(order.getCustomerId());
             modelAndView.addObject("customer", customer);
-            modelAndView.addObject("error", "The order [ " + order.getNumber() + " ] already exists!!");
+            modelAndView.addObject("error", "The order [ " + order.getNumber() + " ] already exist");
         }
 
         return modelAndView;
@@ -77,5 +81,15 @@ public class OrderController {
     @ResponseBody
     public Order getOrderForOrderEdit(@PathVariable("cId") Integer customerId, @PathVariable("oId") Integer orderId){
         return orderService.getBy(customerId, orderId);
+    }
+
+    @RequestMapping(method = RequestMethod.DELETE, path = "/customers/{customerId}/orders/{orderId}/delete")
+    public ModelAndView deleteOrder(@ModelAttribute Order order){
+        ModelAndView mav = new ModelAndView("customer-order-delete");
+        orderService.delete(order);
+        mav.setViewName("redirect/customer/"+order.getCustomerId()+"/orders/");
+
+        return mav;
+
     }
 }

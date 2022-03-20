@@ -51,10 +51,19 @@ public class OrderService {
         return result;
     }
 
-    public void add(Order order) {
+    public boolean add(Order order) {
         // validations for order number
+        if(order.getNumber() != "" && order.getNumber() != " "){
         order.setPlaced(LocalDateTime.now());
         orderDao.add(order);
+        return true;
+        }
+        return false;
+    }
+
+    public boolean delete(Order order){
+        orderDao.delete(order);
+        return true;
     }
 
 
