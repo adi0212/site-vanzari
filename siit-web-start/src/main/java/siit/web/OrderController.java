@@ -83,13 +83,13 @@ public class OrderController {
         return orderService.getBy(customerId, orderId);
     }
 
-    @RequestMapping(method = RequestMethod.DELETE, path = "/customers/{customerId}/orders/{orderId}/delete")
+    @RequestMapping(method = RequestMethod.GET, path = "/customers/{customerId}/orders/{orderId}/delete")
     public ModelAndView deleteOrder(@ModelAttribute Order order){
-        ModelAndView mav = new ModelAndView("customer-order-delete");
-        orderService.delete(order);
-        mav.setViewName("redirect/customer/"+order.getCustomerId()+"/orders/");
-
+        ModelAndView mav = new ModelAndView("orders");
+        if (order != null ) {
+            orderService.delete(order);
+        }
+        mav.setViewName("redirect:/customer/" + order.getCustomerId() + "/orders");
         return mav;
-
     }
 }

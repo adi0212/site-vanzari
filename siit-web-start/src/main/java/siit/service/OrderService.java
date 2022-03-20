@@ -62,7 +62,7 @@ public class OrderService {
     }
 
     public boolean delete(Order order){
-        orderDao.delete(order);
+        orderDao.delete(order.getId());
         return true;
     }
 

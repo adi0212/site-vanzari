@@ -62,8 +62,8 @@ public class OrderDao {
         jdbcTemplate.update(sql, order.getCustomerId(), order.getNumber(), order.getPlaced());
     }
 
-    public void delete(Order order){
-        String sql = "DELETE FROM ORDERS WHERE ID = ?";
-        jdbcTemplate.update(sql, order.getId());
+    public void delete(Integer order){
+        String sql = "delete from orders where id = " + order;
+        jdbcTemplate.update(sql);
     }
 }
