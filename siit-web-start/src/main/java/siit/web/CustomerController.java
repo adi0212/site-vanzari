@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import siit.model.Customer;
+import siit.personal_errors.IncorrectNameException;
+import siit.personal_errors.IncorrectPhoneNumberException;
 import siit.service.CustomerService;
 
 @Controller
@@ -35,9 +37,18 @@ public class CustomerController {
     @RequestMapping(method = RequestMethod.POST, path = "/{id}/edit")
     public ModelAndView performCustomerEdit(@ModelAttribute Customer customer) {
         ModelAndView mav = new ModelAndView("customer-edit");
-        customerService.update(customer);
-        mav.setViewName("redirect:/customers");
-        return mav;
-    }
 
+        try {
+            customerService.update(customer);
+                mav.setViewName("redirect:/customers");
+
+
+        } catch (IncorrectNameException | IncorrectPhoneNumberException e) {
+            String errorMessage =   e.getMessage();
+            mav.addObject("error", errorMessage);
+
+        }
+        return mav;
+
+    }
 }
